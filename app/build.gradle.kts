@@ -76,4 +76,6 @@ dependencies {
     //Gson
     implementation(libs.gson)
 
+    //Splash
+    implementation(libs.androidx.core.splashscreen)
 }
