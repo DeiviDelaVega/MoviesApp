@@ -12,6 +12,6 @@ object MovieMock {
         MoviesDTO(1, "Inception", "Sci-Fi", "https://cataas.com/cat", 3.4),
         MoviesDTO(2, "The Dark Knight", "Action", "https://cataas.com/cat", 3.4),
         MoviesDTO(3, "Interstellar", "Adventure", "https://cataas.com/cat", 3.4),
-        MoviesDTO(4, "Interstellar", "Adventure", "https://cataas.com/cat", 3.4)
+        MoviesDTO(4, "Interstellar", "Adventure", "https://cataas.com/cat/sleep", 3.4)
     )
 }
