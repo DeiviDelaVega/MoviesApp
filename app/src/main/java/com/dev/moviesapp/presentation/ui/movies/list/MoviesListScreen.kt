@@ -26,9 +26,17 @@ import com.dev.moviesapp.presentation.common.colorBackground
 import com.dev.moviesapp.presentation.ui.movies.list.components.MoviesCard
 import com.dev.moviesapp.presentation.ui.theme.jakartaFamily
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.dev.moviesapp.presentation.ui.movies.list.components.ModernSearchBar
 
 @Composable
 fun MoviesListScreen() {
+
+    var query by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -51,6 +59,11 @@ fun MoviesListScreen() {
                 fontWeight = FontWeight.Bold
             )
         }
+
+        ModernSearchBar(
+            query = query,
+            onQueryChange = { query = it }
+        )
 
         Text(
             text = stringResource(R.string.sub_title_movie_list),
