@@ -1,12 +1,17 @@
-package com.dev.moviesapp.ui.theme
+package com.dev.moviesapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.dev.moviesapp.R
 
 // Set of Material typography styles to start with
+val jakartaFamily = FontFamily(
+    Font(R.font.jakarta_bold, FontWeight.Bold)
+)
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
