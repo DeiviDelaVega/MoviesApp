@@ -35,14 +35,18 @@ fun MoviesListScreen() {
             .colorBackground()
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 18.dp),
             contentAlignment = Alignment.TopCenter
+
         ) {
             Text(
                 text = stringResource(R.string.title_movie_list),
                 fontSize = 22.sp,
                 color = Color.White,
-                modifier = Modifier.padding(top = 18.dp),
+                modifier = Modifier.padding(top = 22.dp),
+
                 fontFamily = jakartaFamily,
                 fontWeight = FontWeight.Bold
             )
@@ -53,7 +57,8 @@ fun MoviesListScreen() {
             fontSize = 22.sp,
             color = Color.White,
             modifier = Modifier
-                .padding(top = 40.dp, start = 16.dp),
+                .padding(top = 40.dp, start = 22.dp),
+
             fontFamily = jakartaFamily,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Start

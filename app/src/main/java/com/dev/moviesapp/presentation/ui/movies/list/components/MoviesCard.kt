@@ -38,75 +38,77 @@ fun MoviesCard(
     title: String,
     subTitle: String
 ) {
-    Card(
-        modifier = Modifier.size(height = 240.dp, width = 160.dp),
-        colors = CardDefaults.cardColors(Color.White),
+    Column(
+        modifier = Modifier
+            .width(160.dp)
+            .padding(8.dp)
     ) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            AsyncImage(
-                model = image,
-                contentDescription = "Movie image",
-                modifier = Modifier.fillMaxSize(),
-                alignment = Alignment.Center,
-                contentScale = ContentScale.Crop,
-            )
-
-            OutlinedCard(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(8.dp)
-                    .size(width = 35.dp, height = 18.dp),
-                shape = RoundedCornerShape(6.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.Gray.copy(alpha = 0.4f)
-                ),
-                border = BorderStroke(0.5.dp, Color.Black)
-            ) {
-                Row(
+        Card(
+            modifier = Modifier.size(height = 240.dp, width = 180.dp),
+            colors = CardDefaults.cardColors(Color.White),
+        ) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                AsyncImage(
+                    model = image,
+                    contentDescription = "Movie image",
                     modifier = Modifier.fillMaxSize(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.estrella_icon),
-                        contentDescription = "Star icon",
-                        modifier = Modifier.size(8.dp),
-                        tint = Color.Unspecified
-                    )
-                    Spacer(modifier = Modifier.width(2.dp))
-                    Text(
-                        text = rating.toString(),
-                        color = Color.White,
-                        style = TextStyle(
-                            fontFamily = jakartaFamily,
-                            fontSize = 8.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                }
-            }
+                    alignment = Alignment.Center,
+                    contentScale = ContentScale.Crop,
+                )
 
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(8.dp)
-            ) {
-                Text(
-                    text = title,
-                    fontSize = 14.sp,
-                    color = Color.White,
-                    fontFamily = jakartaFamily,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = subTitle,
-                    fontSize = 12.sp,
-                    color = Color.White,
-                    fontFamily = jakartaFamily,
-                    fontWeight = FontWeight.Normal,
-                )
+                OutlinedCard(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(8.dp)
+                        .size(width = 45.dp, height = 24.dp),
+                    shape = RoundedCornerShape(6.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.Gray.copy(alpha = 0.4f)
+                    ),
+                    border = BorderStroke(0.5.dp, Color.Black)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.estrella_icon),
+                            contentDescription = "Star icon",
+                            modifier = Modifier.size(10.dp),
+                            tint = Color.Unspecified
+                        )
+                        Spacer(modifier = Modifier.width(2.dp))
+                        Text(
+                            text = rating.toString(),
+                            color = Color.White,
+                            style = TextStyle(
+                                fontFamily = jakartaFamily,
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        )
+                    }
+                }
+
             }
         }
+
+        Text(
+            text = title,
+            fontSize = 16.sp,
+            color = Color.White,
+            fontFamily = jakartaFamily,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 4.dp)
+        )
+        Text(
+            text = subTitle,
+            fontSize = 14.sp,
+            color = Color.Gray,
+            fontFamily = jakartaFamily,
+            fontWeight = FontWeight.Normal,
+        )
     }
 }
 
