@@ -30,6 +30,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.dev.moviesapp.data.remote.dto.MoviesDTO
 import com.dev.moviesapp.presentation.ui.movies.list.components.ModernSearchBar
 
 @Composable
@@ -90,12 +91,7 @@ fun CardMoviesList() {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(MovieMock.movieList) { item ->
-            MoviesCard(
-                image = item.image,
-                rating = item.rating,
-                title = item.title,
-                subTitle = item.subTitle
-            )
+            MoviesCard(item)
         }
     }
 }
