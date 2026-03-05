@@ -29,14 +29,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.dev.moviesapp.R
+import com.dev.moviesapp.data.remote.dto.MoviesDTO
 import com.dev.moviesapp.presentation.ui.theme.jakartaFamily
 
 @Composable
 fun MoviesCard(
-    image: String,
-    rating: Double,
-    title: String,
-    subTitle: String
+    movie : MoviesDTO
 ) {
     Column(
         modifier = Modifier
@@ -49,7 +47,7 @@ fun MoviesCard(
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 AsyncImage(
-                    model = image,
+                    model = movie.image,
                     contentDescription = "Movie image",
                     modifier = Modifier.fillMaxSize(),
                     alignment = Alignment.Center,
@@ -80,7 +78,7 @@ fun MoviesCard(
                         )
                         Spacer(modifier = Modifier.width(2.dp))
                         Text(
-                            text = rating.toString(),
+                            text = movie.rating.toString(),
                             color = Color.White,
                             style = TextStyle(
                                 fontFamily = jakartaFamily,
@@ -95,7 +93,7 @@ fun MoviesCard(
         }
 
         Text(
-            text = title,
+            text = movie.title,
             fontSize = 16.sp,
             color = Color.White,
             fontFamily = jakartaFamily,
@@ -103,7 +101,7 @@ fun MoviesCard(
             modifier = Modifier.padding(top = 4.dp)
         )
         Text(
-            text = subTitle,
+            text = movie.subTitle,
             fontSize = 14.sp,
             color = Color.Gray,
             fontFamily = jakartaFamily,
@@ -115,5 +113,7 @@ fun MoviesCard(
 @Preview
 @Composable
 fun PreviewMovieCard() {
-    MoviesCard("https://cataas.com/cat", 3.4, "Interestelar", "Sci-Fi")
+    MoviesCard(MoviesDTO(
+        1,"https://cataas.com/cat", "Sci-Fi", "Interestelar", 3.4
+    ))
 }
