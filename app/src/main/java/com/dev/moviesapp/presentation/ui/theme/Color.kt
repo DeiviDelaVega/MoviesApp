@@ -11,3 +11,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val backgroundColor = Color(0xFF111121)
+
+val circleBlue = Color(0xFF272C38)
+
+val buttonWatchBlue = Color(0xFF1717CF)

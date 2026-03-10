@@ -30,7 +30,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.dev.moviesapp.data.remote.dto.MoviesDTO
 import com.dev.moviesapp.presentation.ui.movies.list.components.ModernSearchBar
 
 @Composable
@@ -71,7 +70,7 @@ fun MoviesListScreen() {
             fontSize = 22.sp,
             color = Color.White,
             modifier = Modifier
-                .padding(top = 40.dp, start = 22.dp),
+                .padding(top = 28.dp, start = 22.dp, bottom = 8.dp),
 
             fontFamily = jakartaFamily,
             fontWeight = FontWeight.Bold,

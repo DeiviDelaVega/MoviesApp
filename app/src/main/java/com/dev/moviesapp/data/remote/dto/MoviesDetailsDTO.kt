@@ -6,4 +6,6 @@ data class MoviesDetailsDTO(
     var subTitle : String,
     var image : String,
     var rating : Double,
+    var synopsis : String,
+    var video : String
 )
