@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.dev.moviesapp.presentation.ui.movies.details.MovieDetailsScreen
 import com.dev.moviesapp.presentation.ui.movies.list.MoviesListScreen
 import com.dev.moviesapp.presentation.ui.theme.MoviesAppTheme
 
@@ -18,7 +19,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MoviesAppTheme {
-                MoviesListScreen()
+                MovieDetailsScreen()
             }
         }
     }
