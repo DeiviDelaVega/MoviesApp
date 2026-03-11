@@ -1,10 +1,25 @@
 package com.dev.moviesapp.data.remote.dto
 
+import com.google.gson.annotations.SerializedName
+
+
+data class MoviesDataResponse(
+    @SerializedName("page")
+    var page: Int,
+    @SerializedName("results")
+    var result: List<MoviesDTO>
+)
+
 data class MoviesDTO(
+    @SerializedName("id")
     var id: Int,
+    @SerializedName("original_title")
     var title: String,
+    @SerializedName("release_date")
     var subTitle: String,
+    @SerializedName("poster_path")
     var image: String,
+    @SerializedName("vote_average")
     var rating: Double,
 )
 
