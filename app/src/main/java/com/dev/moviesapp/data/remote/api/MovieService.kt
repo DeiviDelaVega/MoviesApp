@@ -13,8 +13,8 @@ interface MovieService {
     suspend fun listMovies() : Response<MoviesDataResponse>
 
     @GET("movie/{movie_id}")
-    suspend fun detailsMovies(@Path("movie_id") movieId : Int) : MoviesDetailsDTO
+    suspend fun detailsMovies(@Path("movie_id") movieId : Int) : Response<MoviesDetailsDTO>
 
-    @GET("{movie_id}/videos")
+    @GET("movie/{movie_id}/videos")
     suspend fun videoMovieId(@Path("movie_id") movieId : Int): Response<VideoDataResponse>
 }
