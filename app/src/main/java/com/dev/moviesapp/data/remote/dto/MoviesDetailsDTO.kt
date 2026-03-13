@@ -13,7 +13,7 @@ data class MoviesDetailsDTO(
     var id : Int,
     @SerializedName("original_title")
     var title : String,
-    @SerializedName("original_title")
+    @SerializedName("release_date")
     var subTitle : String,
     @SerializedName("poster_path")
     var image : String,

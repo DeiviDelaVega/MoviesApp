@@ -8,9 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.dev.moviesapp.presentation.ui.movies.details.MovieDetailsScreen
-import com.dev.moviesapp.presentation.ui.movies.list.MoviesListScreen
 import com.dev.moviesapp.presentation.ui.theme.MoviesAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
