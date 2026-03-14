@@ -10,11 +10,11 @@ import retrofit2.http.Path
 interface MovieService {
 
     @GET("movie/popular")
-    suspend fun listMovies() : Response<MoviesDataResponse>
+    suspend fun getPopularMovies() : Response<MoviesDataResponse>
 
     @GET("movie/{movie_id}")
-    suspend fun detailsMovies(@Path("movie_id") movieId : Int) : Response<MoviesDetailsDTO>
+    suspend fun getMovieDetail(@Path("movie_id") movieId : Int) : Response<MoviesDetailsDTO>
 
     @GET("movie/{movie_id}/videos")
-    suspend fun videoMovieId(@Path("movie_id") movieId : Int): Response<VideoDataResponse>
+    suspend fun getMovieVideos(@Path("movie_id") movieId : Int): Response<VideoDataResponse>
 }

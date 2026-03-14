@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,9 +44,9 @@ fun MovieDetailsScreen() {
     val moviesDetailsDTO = MoviesDetailsDTO(
         id = 1,
         title = "Inception",
-        subTitle = "Sci-Fi",
-        image = "https://cataas.com/cat",
-        rating = 3.4,
+        releaseDate = "Sci-Fi",
+        posterPath = "https://cataas.com/cat",
+        voteAverage = 3.4,
         synopsis = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         video = false
     )
@@ -91,7 +90,7 @@ fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
                     verticalAlignment = Alignment.Bottom
                 ) {
                     MoviesDetailCard(
-                        image = moviesDetailsDTO.image,
+                        image = moviesDetailsDTO.posterPath,
                         modifier = Modifier.size(width = 140.dp, height = 210.dp)
                     )
 
@@ -113,7 +112,7 @@ fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             Text(
-                                text = "${moviesDetailsDTO.rating}/10",
+                                text = "${moviesDetailsDTO.voteAverage}/10",
                                 color = Color.LightGray,
                                 fontSize = 18.sp,
                                 fontFamily = jakartaFamily,
