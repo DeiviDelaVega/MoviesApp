@@ -3,7 +3,10 @@ package com.dev.moviesapp.data.local.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import com.dev.moviesapp.data.local.entity.MovieEntity
+import androidx.room.Query
+import com.dev.moviesapp.data.local.entity.MovieDetailEntity
+import kotlinx.coroutines.flow.Flow
+
 /**
  * DAO que gestiona el acceso a la tabla de películas en Room.
  *
@@ -16,5 +19,8 @@ import com.dev.moviesapp.data.local.entity.MovieEntity
 interface MovieDetailDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovie(movieEntity: MovieEntity)
+    suspend fun insertMovie(movieEntity: MovieDetailEntity)
+
+    @Query("SELECT * FROM movie_detail WHERE id = :movieId")
+    fun getMovieDetail(movieId: Int): Flow<MovieDetailEntity?>
 }
