@@ -47,7 +47,7 @@ fun MoviesCard(
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 AsyncImage(
-                    model = movie.image,
+                    model = movie.posterPath,
                     contentDescription = "Movie image",
                     modifier = Modifier.fillMaxSize(),
                     alignment = Alignment.Center,
@@ -78,7 +78,7 @@ fun MoviesCard(
                         )
                         Spacer(modifier = Modifier.width(2.dp))
                         Text(
-                            text = movie.rating.toString(),
+                            text = movie.voteAverage.toString(),
                             color = Color.White,
                             style = TextStyle(
                                 fontFamily = jakartaFamily,
@@ -101,7 +101,7 @@ fun MoviesCard(
             modifier = Modifier.padding(top = 4.dp)
         )
         Text(
-            text = movie.subTitle,
+            text = movie.releaseDate,
             fontSize = 14.sp,
             color = Color.Gray,
             fontFamily = jakartaFamily,

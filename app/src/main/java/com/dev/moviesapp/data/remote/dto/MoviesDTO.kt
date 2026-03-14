@@ -5,22 +5,22 @@ import com.google.gson.annotations.SerializedName
 
 data class MoviesDataResponse(
     @SerializedName("page")
-    var page: Int,
+    val page: Int,
     @SerializedName("results")
-    var result: List<MoviesDTO>
+    val results: List<MoviesDTO>
 )
 
 data class MoviesDTO(
     @SerializedName("id")
-    var id: Int,
+    val id: Int,
     @SerializedName("original_title")
-    var title: String,
+    val originalTitle: String,
     @SerializedName("release_date")
-    var subTitle: String,
+    val releaseDate: String,
     @SerializedName("poster_path")
-    var image: String,
+    val posterPath: String,
     @SerializedName("vote_average")
-    var rating: Double,
+    val voteAverage: Double
 )
 
 object MovieMock {

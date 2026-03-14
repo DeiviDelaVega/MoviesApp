@@ -2,30 +2,19 @@ package com.dev.moviesapp.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class VideoDataResponse(
-    @SerializedName("id")
-    var id: Int,
-    @SerializedName("results")
-    var result: List<MoviesVideo>
-)
 data class MoviesDetailsDTO(
     @SerializedName("id")
-    var id : Int,
+    val id: Int,
     @SerializedName("original_title")
-    var title : String,
+    val title: String,
     @SerializedName("release_date")
-    var subTitle : String,
+    val releaseDate: String,
     @SerializedName("poster_path")
-    var image : String,
+    val posterPath: String,
     @SerializedName("vote_average")
-    var rating : Double,
+    val voteAverage: Double,
     @SerializedName("overview")
-    var synopsis : String,
+    val synopsis: String,
     @SerializedName("video")
-    var video : Boolean
-)
-
-data class MoviesVideo(
-    @SerializedName("key")
-    var video : String
+    val video: Boolean
 )
