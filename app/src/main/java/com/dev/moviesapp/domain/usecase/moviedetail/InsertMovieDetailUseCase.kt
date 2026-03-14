@@ -7,5 +7,6 @@ import javax.inject.Inject
 class InsertMovieDetailUseCase @Inject constructor(
     private val movieDetailRepository: MovieDetailRepository
 ) {
-    suspend operator fun invoke(movie: MovieDetail) : Result<Unit> = movieDetailRepository.insertMovie(movie)
+    suspend operator fun invoke(movie: MovieDetail): Result<Unit> =
+        movieDetailRepository.insertMovie(movie)
 }
