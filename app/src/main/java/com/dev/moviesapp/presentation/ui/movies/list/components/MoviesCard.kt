@@ -30,11 +30,12 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.dev.moviesapp.R
 import com.dev.moviesapp.data.remote.dto.MoviesDTO
+import com.dev.moviesapp.presentation.ui.model.MovieUiModel
 import com.dev.moviesapp.presentation.ui.theme.jakartaFamily
 
 @Composable
 fun MoviesCard(
-    movie : MoviesDTO
+    movie : MovieUiModel
 ) {
     Column(
         modifier = Modifier
@@ -47,7 +48,7 @@ fun MoviesCard(
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 AsyncImage(
-                    model = movie.posterPath,
+                    model = movie.posterUrl,
                     contentDescription = "Movie image",
                     modifier = Modifier.fillMaxSize(),
                     alignment = Alignment.Center,
@@ -78,7 +79,7 @@ fun MoviesCard(
                         )
                         Spacer(modifier = Modifier.width(2.dp))
                         Text(
-                            text = movie.voteAverage.toString(),
+                            text = movie.rating.toString(),
                             color = Color.White,
                             style = TextStyle(
                                 fontFamily = jakartaFamily,
@@ -101,7 +102,7 @@ fun MoviesCard(
             modifier = Modifier.padding(top = 4.dp)
         )
         Text(
-            text = movie.releaseDate,
+            text = movie.overview,
             fontSize = 14.sp,
             color = Color.Gray,
             fontFamily = jakartaFamily,
@@ -109,11 +110,11 @@ fun MoviesCard(
         )
     }
 }
-
-@Preview
-@Composable
-fun PreviewMovieCard() {
-    MoviesCard(MoviesDTO(
-        1,"https://cataas.com/cat", "Sci-Fi", "Interestelar", 3.4
-    ))
-}
+//
+//@Preview
+//@Composable
+//fun PreviewMovieCard() {
+//    MoviesCard(MoviesDTO(
+//        1,"https://cataas.com/cat", "Sci-Fi", "Interestelar", 3.4
+//    ))
+//}
