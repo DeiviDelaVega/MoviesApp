@@ -7,7 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.ui.NavDisplay
 import com.dev.moviesapp.presentation.ui.movies.details.MovieDetailsScreen
+import com.dev.moviesapp.presentation.ui.movies.list.MoviesListScreen
+import com.dev.moviesapp.presentation.ui.navigation.Detail
+import com.dev.moviesapp.presentation.ui.navigation.Home
 import com.dev.moviesapp.presentation.ui.theme.MoviesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,10 +27,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MoviesAppTheme {
-                MovieDetailsScreen()
+                NavHost()
             }
         }
     }
+}
+
+@Composable
+fun NavHost() {
+
+    val backStack = rememberNavBackStack(Home)
+
+    NavDisplay(
+        backStack = backStack,
+        onBack = { backStack.removeLastOrNull() },
+        entryDecorators = listOf(rememberSaveableStateHolderNavEntryDecorator()),
+        entryProvider = entryProvider {
+            entry<Home> {
+                MoviesListScreen()
+            }
+            entry<Detail> {
+                MovieDetailsScreen()
+            }
+        }
+    )
 }
 
 

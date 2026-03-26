@@ -21,19 +21,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dev.moviesapp.R
-import com.dev.moviesapp.data.remote.dto.MovieMock
 import com.dev.moviesapp.presentation.common.colorBackground
 import com.dev.moviesapp.presentation.ui.movies.list.components.MoviesCard
 import com.dev.moviesapp.presentation.ui.theme.jakartaFamily
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.dev.moviesapp.presentation.ui.model.MovieUiModel
 import com.dev.moviesapp.presentation.ui.movies.list.components.ModernSearchBar
 
 @Composable
-fun MoviesListScreen() {
+fun MoviesListScreen(
+    viewModel: MovieListViewModel = hiltViewModel()
+) {
+
+    val addPlayerUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     var query by remember { mutableStateOf("") }
 
@@ -76,21 +83,89 @@ fun MoviesListScreen() {
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Start
         )
-
-        CardMoviesList()
+        when (val state = addPlayerUiState) {
+            is MovieListUiState.Loading -> LoadingView()
+            is MovieListUiState.Empty   -> EmptyView()
+            is MovieListUiState.Error   -> ErrorView(state.message)
+            is MovieListUiState.Success -> CardMoviesList(state.movies)
+        }
     }
 }
 
 @Composable
-fun CardMoviesList() {
+fun CardMoviesList(movieList : List<MovieUiModel>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(MovieMock.movieList) { item ->
+        items(movieList) { item ->
             MoviesCard(item)
+        }
+    }
+}
+
+@Composable
+fun LoadingView() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator(
+            color = Color.White
+        )
+    }
+}
+
+@Composable
+fun EmptyView() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = "🎬",
+                fontSize = 48.sp
+            )
+            Text(
+                text = "No hay películas",
+                color = Color.White,
+                fontSize = 16.sp,
+                fontFamily = jakartaFamily,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+@Composable
+fun ErrorView(message: String) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = "⚠️",
+                fontSize = 48.sp
+            )
+            Text(
+                text = message,
+                color = Color.White,
+                fontSize = 16.sp,
+                fontFamily = jakartaFamily,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 32.dp)
+            )
         }
     }
 }
