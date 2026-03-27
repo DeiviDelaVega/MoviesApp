@@ -16,6 +16,7 @@ import com.dev.moviesapp.presentation.ui.movies.list.MoviesListScreen
 import com.dev.moviesapp.presentation.ui.navigation.Detail
 import com.dev.moviesapp.presentation.ui.navigation.Home
 import com.dev.moviesapp.presentation.ui.theme.MoviesAppTheme
+import com.dev.moviesapp.utils.windowInsets
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +26,7 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        windowInsets(window)
         setContent {
             MoviesAppTheme {
                 NavHost()
@@ -52,8 +54,6 @@ fun NavHost() {
         }
     )
 }
-
-
 
 @Preview(showBackground = true)
 @Composable
