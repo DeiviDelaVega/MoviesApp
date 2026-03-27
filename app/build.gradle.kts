@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -14,6 +16,9 @@ android {
     namespace = "com.dev.moviesapp"
     compileSdk = 36
 
+    val localProperties = Properties()
+    localProperties.load(rootProject.file("local.properties").inputStream())
+
     defaultConfig {
         applicationId = "com.dev.moviesapp"
         minSdk = 24
@@ -22,17 +27,8 @@ android {
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField(
-            "String",
-            "TMDB_API_KEY",
-            "\"${project.findProperty("TMDB_API_KEY")}\""
-        )
-
-        buildConfigField(
-            "String",
-            "ACCESS_TOKEN",
-            "\"${project.findProperty("ACCESS_TOKEN")}\""
-        )
+        buildConfigField("String", "TMDB_API_KEY", "\"${localProperties["TMDB_API_KEY"]}\"")
+        buildConfigField("String", "ACCESS_TOKEN", "\"${localProperties["ACCESS_TOKEN"]}\"")
     }
 
     buildTypes {
