@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.dev.moviesapp.data.local.entity.MovieDetailEntity
 import com.dev.moviesapp.data.local.entity.MovieEntity
 import kotlinx.coroutines.flow.Flow
 /**

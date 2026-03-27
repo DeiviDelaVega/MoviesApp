@@ -25,7 +25,6 @@ import com.dev.moviesapp.presentation.common.colorBackground
 import com.dev.moviesapp.presentation.ui.movies.list.components.MoviesCard
 import com.dev.moviesapp.presentation.ui.theme.jakartaFamily
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember

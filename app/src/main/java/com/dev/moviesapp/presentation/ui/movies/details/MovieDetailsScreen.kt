@@ -58,9 +58,11 @@ fun MovieDetailsScreen() {
 fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
 
     val scrollState = rememberScrollState()
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .colorBackground()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .colorBackground()
+    ) {
 
         Column(
             modifier = Modifier
