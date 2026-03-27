@@ -107,38 +107,29 @@ fun CardMoviesList(movieList : List<MovieUiModel>) {
 }
 
 @Composable
-fun LoadingView() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+fun EmptyView() {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        CircularProgressIndicator(
-            color = Color.White
-        )
+        items(6) {
+            MoviesCardShimmer()
+        }
     }
 }
 
 @Composable
-fun EmptyView() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+fun LoadingView() {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = "🎬",
-                fontSize = 48.sp
-            )
-            Text(
-                text = "No hay películas",
-                color = Color.White,
-                fontSize = 16.sp,
-                fontFamily = jakartaFamily,
-                fontWeight = FontWeight.Bold
-            )
+        items(6) {
+            MoviesCardShimmer()
         }
     }
 }

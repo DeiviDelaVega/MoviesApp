@@ -17,7 +17,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
     private val getAllMoviesUseCase: GetAllMoviesUseCase,
-    private val insertMoviesUseCase: InsertMoviesUseCase,
     private val syncMovieUseCase: SyncMovieUseCase
 ) : ViewModel() {
 

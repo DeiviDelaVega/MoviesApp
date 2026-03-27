@@ -8,6 +8,6 @@ import javax.inject.Inject
 class GetAllMoviesUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
-    suspend operator fun invoke(): Flow<List<Movie>> =
+     operator fun invoke(): Flow<List<Movie>> =
         movieRepository.getAllMovies()
 }
