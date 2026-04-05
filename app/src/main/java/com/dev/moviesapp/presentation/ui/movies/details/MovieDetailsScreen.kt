@@ -209,8 +209,14 @@ fun MovieDetails(movieDetailUi: MovieDetailUi) {
 @Preview
 @Composable
 fun PreviewMovieList() {
-    MovieDetailsScreen(
-        movieId = 1,
-        viewModel = hiltViewModel()
+    MovieDetails(
+        movieDetailUi = MovieDetailUi(
+            id = 1,
+            title = "Interestelar",
+            subTitle = "Sci-Fi",
+            image = "https://cataas.com/cat",
+            rating = "8.8",
+            synopsis = "La historia de un grupo de astronautas que viajan a través de un agujero de gusano en busca de un nuevo hogar."
+        )
     )
 }

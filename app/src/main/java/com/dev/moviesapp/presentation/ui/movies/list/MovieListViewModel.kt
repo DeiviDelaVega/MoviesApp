@@ -23,8 +23,14 @@ class MovieListViewModel @Inject constructor(
     val uiState: StateFlow<MovieListUiState> = _uiState.asStateFlow()
 
     init {
-        syncMovieUseCase()
+        syncMovie()
         getAllMovies()
+    }
+
+    private fun syncMovie() {
+        viewModelScope.launch {
+            syncMovieUseCase()
+        }
     }
 
     private fun getAllMovies() {
