@@ -1,6 +1,6 @@
 package com.dev.moviesapp.presentation.ui.model
 
-data class MovieUiModel(
+data class MovieUi(
     val id: Int,
     val title: String,
     val overview: String,

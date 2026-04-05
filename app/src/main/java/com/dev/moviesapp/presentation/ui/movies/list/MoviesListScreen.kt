@@ -31,11 +31,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.dev.moviesapp.presentation.ui.model.MovieUiModel
+import com.dev.moviesapp.presentation.ui.model.MovieUi
 import com.dev.moviesapp.presentation.ui.movies.list.components.ModernSearchBar
 
 @Composable
 fun MoviesListScreen(
+    onClick: (Int) -> Unit,
     viewModel: MovieListViewModel = hiltViewModel()
 ) {
 
@@ -84,15 +85,21 @@ fun MoviesListScreen(
         )
         when (val state = addPlayerUiState) {
             is MovieListUiState.Loading -> LoadingView()
-            is MovieListUiState.Empty   -> EmptyView()
-            is MovieListUiState.Error   -> ErrorView(state.message)
-            is MovieListUiState.Success -> CardMoviesList(state.movies)
+            is MovieListUiState.Empty -> EmptyView()
+            is MovieListUiState.Error -> ErrorView(state.message)
+            is MovieListUiState.Success -> CardMoviesList(
+                state.movies,
+                onClick = onClick
+            )
         }
     }
 }
 
 @Composable
-fun CardMoviesList(movieList : List<MovieUiModel>) {
+fun CardMoviesList(
+    movieList: List<MovieUi>,
+    onClick: (Int) -> Unit
+) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
@@ -100,7 +107,10 @@ fun CardMoviesList(movieList : List<MovieUiModel>) {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(movieList) { item ->
-            MoviesCard(item)
+            MoviesCard(
+                item,
+                onMovieClick = { onClick(item.id) }
+            )
         }
     }
 }
@@ -163,5 +173,8 @@ fun ErrorView(message: String) {
 @Preview
 @Composable
 fun PreviewMovieList() {
-    MoviesListScreen()
+    MoviesListScreen(
+        onClick = {},
+        viewModel = hiltViewModel()
+    )
 }

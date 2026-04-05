@@ -46,10 +46,14 @@ fun NavHost() {
         entryDecorators = listOf(rememberSaveableStateHolderNavEntryDecorator()),
         entryProvider = entryProvider {
             entry<Home> {
-                MoviesListScreen()
+                MoviesListScreen(
+                    onClick = { movieId ->
+                        backStack.add(Detail(movieId))
+                    }
+                )
             }
-            entry<Detail> {
-                MovieDetailsScreen()
+            entry<Detail> { entry ->
+                MovieDetailsScreen(entry.movieId)
             }
         }
     )

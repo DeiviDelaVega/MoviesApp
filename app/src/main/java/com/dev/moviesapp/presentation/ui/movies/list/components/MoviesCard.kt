@@ -24,18 +24,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.dev.moviesapp.R
-import com.dev.moviesapp.data.remote.dto.MoviesDTO
-import com.dev.moviesapp.presentation.ui.model.MovieUiModel
+import com.dev.moviesapp.presentation.ui.model.MovieUi
 import com.dev.moviesapp.presentation.ui.theme.jakartaFamily
 
 @Composable
 fun MoviesCard(
-    movie : MovieUiModel
+    movie : MovieUi,
+    onMovieClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -45,6 +44,7 @@ fun MoviesCard(
         Card(
             modifier = Modifier.size(height = 240.dp, width = 180.dp),
             colors = CardDefaults.cardColors(Color.White),
+            onClick = onMovieClick
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 AsyncImage(
@@ -79,7 +79,7 @@ fun MoviesCard(
                         )
                         Spacer(modifier = Modifier.width(2.dp))
                         Text(
-                            text = movie.rating.toString(),
+                            text = movie.rating,
                             color = Color.White,
                             style = TextStyle(
                                 fontFamily = jakartaFamily,

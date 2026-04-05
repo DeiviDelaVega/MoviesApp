@@ -19,6 +19,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -29,33 +31,41 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dev.moviesapp.presentation.common.colorBackground
 import com.dev.moviesapp.presentation.ui.movies.details.components.CircularImageWithBackground
 import com.dev.moviesapp.R
-import com.dev.moviesapp.data.remote.dto.MoviesDetailsDTO
+import com.dev.moviesapp.presentation.ui.model.MovieDetailUi
 import com.dev.moviesapp.presentation.ui.movies.details.components.ButtonWatchVideo
 import com.dev.moviesapp.presentation.ui.movies.details.components.MoviesDetailCard
+import com.dev.moviesapp.presentation.ui.movies.list.ErrorView
 import com.dev.moviesapp.presentation.ui.theme.circleBlue
 import com.dev.moviesapp.presentation.ui.theme.jakartaFamily
 
 @Composable
-fun MovieDetailsScreen() {
+fun MovieDetailsScreen(
+    movieId: Int,
+    viewModel: MovieDetailsViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val moviesDetailsDTO = MoviesDetailsDTO(
-        id = 1,
-        title = "Inception",
-        releaseDate = "Sci-Fi",
-        posterPath = "https://cataas.com/cat",
-        voteAverage = 3.4,
-        synopsis = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        video = false
-    )
+    LaunchedEffect(movieId) {
+        viewModel.loadMovieDetail(movieId)
+    }
 
-    MovieDetails(moviesDetailsDTO = moviesDetailsDTO)
+    when (val state = uiState) {
+        is MovieDetailsUiState.Loading -> MovieDetailShimmer()
+        is MovieDetailsUiState.Empty -> MovieDetailShimmer()
+        is MovieDetailsUiState.Error -> ErrorView(state.message)
+        is MovieDetailsUiState.Success -> {
+            MovieDetails(movieDetailUi = state.movieDetail)
+        }
+    }
 }
 
 @Composable
-fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
+fun MovieDetails(movieDetailUi: MovieDetailUi) {
 
     val scrollState = rememberScrollState()
     Box(
@@ -92,7 +102,7 @@ fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
                     verticalAlignment = Alignment.Bottom
                 ) {
                     MoviesDetailCard(
-                        image = moviesDetailsDTO.posterPath,
+                        image = movieDetailUi.image,
                         modifier = Modifier.size(width = 140.dp, height = 210.dp)
                     )
 
@@ -102,7 +112,7 @@ fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
                             .weight(1f)
                     ) {
                         Text(
-                            text = moviesDetailsDTO.title,
+                            text = movieDetailUi.title,
                             color = Color.White,
                             fontSize = 28.sp,
                             fontFamily = jakartaFamily,
@@ -114,7 +124,7 @@ fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             Text(
-                                text = "${moviesDetailsDTO.voteAverage}/10",
+                                text = "${movieDetailUi.rating}/10",
                                 color = Color.LightGray,
                                 fontSize = 18.sp,
                                 fontFamily = jakartaFamily,
@@ -145,7 +155,7 @@ fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    text = moviesDetailsDTO.synopsis,
+                    text = movieDetailUi.synopsis,
                     color = Color.White.copy(alpha = 0.8f),
                     fontSize = 16.sp,
                     fontFamily = jakartaFamily,
@@ -188,7 +198,7 @@ fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
         ) {
             ButtonWatchVideo(
                 onClick = {
-                    val watch = moviesDetailsDTO.video
+                    val watch = movieDetailUi.rating
                     println(watch)
                 }
             )
@@ -199,5 +209,8 @@ fun MovieDetails(moviesDetailsDTO: MoviesDetailsDTO) {
 @Preview
 @Composable
 fun PreviewMovieList() {
-    MovieDetailsScreen()
+    MovieDetailsScreen(
+        movieId = 1,
+        viewModel = hiltViewModel()
+    )
 }

@@ -3,7 +3,6 @@ package com.dev.moviesapp.presentation.ui.movies.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dev.moviesapp.domain.usecase.movie.GetAllMoviesUseCase
-import com.dev.moviesapp.domain.usecase.movie.InsertMoviesUseCase
 import com.dev.moviesapp.domain.usecase.movie.SyncMovieUseCase
 import com.dev.moviesapp.presentation.mapper.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel

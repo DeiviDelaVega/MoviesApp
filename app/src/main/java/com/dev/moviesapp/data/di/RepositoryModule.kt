@@ -1,6 +1,8 @@
 package com.dev.moviesapp.data.di
 
+import com.dev.moviesapp.data.repository.MovieDetailRepositoryImpl
 import com.dev.moviesapp.data.repository.MovieRepositoryImpl
+import com.dev.moviesapp.domain.repository.MovieDetailRepository
 import com.dev.moviesapp.domain.repository.MovieRepository
 import dagger.Binds
 import dagger.Module
@@ -17,4 +19,10 @@ abstract class RepositoryModule {
     abstract fun bindMovieRepository(
         movieRepositoryImpl: MovieRepositoryImpl
     ): MovieRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindMovieDetailRepository(
+        movieDetailRepositoryImpl: MovieDetailRepositoryImpl
+    ): MovieDetailRepository
 }
