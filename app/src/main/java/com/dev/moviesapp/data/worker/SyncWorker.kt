@@ -8,7 +8,7 @@ import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import com.dev.moviesapp.data.local.database.AppDatabase
+import com.dev.moviesapp.data.local.dao.MovieDao
 import com.dev.moviesapp.data.mapper.toEntity
 import com.dev.moviesapp.data.remote.api.MovieService
 import dagger.assisted.Assisted
@@ -18,7 +18,7 @@ import dagger.assisted.AssistedInject
 class SyncWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted workerParams: WorkerParameters,
-    private val db: AppDatabase,
+    private val movieDao: MovieDao,
     private val apiService: MovieService
 ) : CoroutineWorker(appContext, workerParams) {
 
@@ -28,7 +28,7 @@ class SyncWorker @AssistedInject constructor(
 
             if (response.isSuccessful) {
                 val movies = response.body()?.results ?: emptyList()
-                db.movieDao().insertMovies(
+                movieDao.insertMovies(
                     movies.map { it.toEntity() }
                 )
                 Result.success()

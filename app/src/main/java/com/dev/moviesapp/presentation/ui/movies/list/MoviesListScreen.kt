@@ -40,10 +40,25 @@ fun MoviesListScreen(
     viewModel: MovieListViewModel = hiltViewModel()
 ) {
 
-    val addPlayerUiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     var query by remember { mutableStateOf("") }
 
+    MoviesListContent(
+        uiState = uiState,
+        query = query,
+        onQueryChange = { query = it },
+        onClick = onClick
+    )
+
+}
+@Composable
+fun MoviesListContent(
+    uiState: MovieListUiState,
+    query: String,
+    onQueryChange: (String) -> Unit,
+    onClick: (Int) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -54,14 +69,12 @@ fun MoviesListScreen(
                 .fillMaxWidth()
                 .padding(top = 18.dp),
             contentAlignment = Alignment.TopCenter
-
         ) {
             Text(
                 text = stringResource(R.string.title_movie_list),
                 fontSize = 22.sp,
                 color = Color.White,
                 modifier = Modifier.padding(top = 22.dp),
-
                 fontFamily = jakartaFamily,
                 fontWeight = FontWeight.Bold
             )
@@ -69,7 +82,7 @@ fun MoviesListScreen(
 
         ModernSearchBar(
             query = query,
-            onQueryChange = { query = it }
+            onQueryChange = onQueryChange
         )
 
         Text(
@@ -78,19 +91,17 @@ fun MoviesListScreen(
             color = Color.White,
             modifier = Modifier
                 .padding(top = 28.dp, start = 22.dp, bottom = 8.dp),
-
             fontFamily = jakartaFamily,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Start
         )
-        when (val state = addPlayerUiState) {
+
+        when (val state = uiState) {
             is MovieListUiState.Loading -> LoadingView()
-            is MovieListUiState.Empty -> EmptyView()
-            is MovieListUiState.Error -> ErrorView(state.message)
+            is MovieListUiState.Empty   -> EmptyView()
+            is MovieListUiState.Error   -> ErrorView(state.message)
             is MovieListUiState.Success -> CardMoviesList(
-                state.movies,
-                onClick = onClick
-            )
+                movieList = state.movies,
         }
     }
 }
@@ -173,8 +184,10 @@ fun ErrorView(message: String) {
 @Preview
 @Composable
 fun PreviewMovieList() {
-    MoviesListScreen(
-        onClick = {},
-        viewModel = hiltViewModel()
-    )
+   MoviesListContent(
+       uiState = MovieListUiState.Loading,
+       query = "",
+       onQueryChange = {},
+       onClick = {}
+   )
 }
