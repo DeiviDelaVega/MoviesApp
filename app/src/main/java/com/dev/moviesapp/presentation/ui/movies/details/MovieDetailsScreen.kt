@@ -218,5 +218,4 @@ fun PreviewMovieList() {
             rating = "8.8",
             synopsis = "La historia de un grupo de astronautas que viajan a través de un agujero de gusano en busca de un nuevo hogar."
         )
-    )
 }

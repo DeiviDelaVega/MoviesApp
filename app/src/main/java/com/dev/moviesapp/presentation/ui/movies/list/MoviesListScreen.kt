@@ -102,8 +102,6 @@ fun MoviesListContent(
             is MovieListUiState.Error   -> ErrorView(state.message)
             is MovieListUiState.Success -> CardMoviesList(
                 movieList = state.movies,
-                onClick = onClick
-            )
         }
     }
 }
