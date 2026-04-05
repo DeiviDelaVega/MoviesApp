@@ -2,7 +2,7 @@ package com.dev.moviesapp.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class MoviesDetailsDTO(
+data class MovieDetailDTO(
     @SerializedName("id")
     val id: Int,
     @SerializedName("original_title")
